@@ -82,6 +82,7 @@ namespace WPF_CurrencyConverter_API
         }
         private async void GetValues()
         {
+            // Set here the api url
             values = await GetData<Root>("https://openexchangerates.org/api/latest.json?app_id=YOUR_API_KEY_HERE");
             BindCurrency();
         }
