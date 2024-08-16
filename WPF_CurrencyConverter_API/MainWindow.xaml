@@ -1,0 +1,98 @@
+﻿<Window x:Class="WPF_CurrencyConverter_API.MainWindow"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        xmlns:local="clr-namespace:WPF_CurrencyConverter_API"
+        xmlns:fa="http://schemas.fontawesome.io/icons/"
+        mc:Ignorable="d"
+        Icon="Images/icon.ico"
+        Title="Currency Converter" SizeToContent="WidthAndHeight" WindowStartupLocation="CenterScreen"
+        ResizeMode="CanMinimize"
+        >
+
+    <Grid>
+        <Grid.RowDefinitions>
+            <RowDefinition Height="60"/>
+            <RowDefinition Height="80"/>
+            <RowDefinition Height="150"/>
+            <RowDefinition Height="100"/>
+            <RowDefinition Height="150"/>
+        </Grid.RowDefinitions>
+        <!-- BorderThickness= espesor del borde, entre más, más pequeño su contenido-->
+        <Border Grid.Row="2" Width="800" CornerRadius="10" BorderThickness="5">
+            <Border.BorderBrush>
+                <LinearGradientBrush StartPoint="0,0" EndPoint="1,0">
+                    <GradientStop Color="#eeaeca" Offset="0.0"/>
+                    <GradientStop Color="#94bbe9" Offset="0.85"/>
+                </LinearGradientBrush>
+            </Border.BorderBrush>
+
+            <Rectangle Grid.Row="2">
+                <Rectangle.Fill>
+                    <!-- relleno del rectángulo-->
+                    <LinearGradientBrush StartPoint="0,0" EndPoint="1,0">
+                        <GradientStop Color="#eeaeca" Offset="0.0"/>
+                        <GradientStop Color="#94bbe9" Offset="0.85"/>
+                    </LinearGradientBrush>
+                </Rectangle.Fill>
+            </Rectangle>
+        </Border>
+
+        <!--Tittle-->
+        <StackPanel Grid.Row="0" Width="1000" Height="50" Orientation="Horizontal">
+            <Label Content="Currency Converter" Width="1000" HorizontalContentAlignment="Center" VerticalContentAlignment="Center"
+                   FontSize="30"
+                   Foreground="#ec2075"/>
+        </StackPanel>
+        <!--Coverted value panel-->
+        <StackPanel Grid.Row="1" Orientation="Vertical" HorizontalAlignment="Center" Height="80" Width="1000">
+            <Label Content="Convertered currency" Height="40" Width="1000" FontSize="20" HorizontalContentAlignment="Center" VerticalContentAlignment="Center"/>
+            <Label x:Name="LabelConvertedValue" Height="40" Width="1000" FontSize="20" HorizontalContentAlignment="Center" VerticalContentAlignment="center" />
+        </StackPanel>
+        <!--List labels-->
+        <StackPanel Grid.Row="2" Orientation="Horizontal" HorizontalAlignment="Center" VerticalAlignment="Top" Height="60" Width="800">
+            <Label Content="Enter Amount:" Margin="35 0 0 0" VerticalContentAlignment="Bottom" Foreground="White" FontSize="20"/>
+            <Label Content="From:" Margin="110 0 0 0" VerticalContentAlignment="Bottom" Foreground="White" FontSize="20"/>
+            <Label Content="To:" Margin="180 0 0 0" VerticalContentAlignment="Bottom" Foreground="White" FontSize="20"/>
+        </StackPanel>
+        <!--Boxes-->
+        <StackPanel Grid.Row="2" Orientation="Horizontal" HorizontalAlignment="Center" VerticalAlignment="Bottom" Height="90" Width="800">
+            <TextBox x:Name="AmountBox" PreviewTextInput="EnteredAmount" Width="200" Height="30" Margin="40 0 0 0"  FontSize="18" VerticalContentAlignment="Center" VerticalAlignment="Top"/>
+            <ComboBox x:Name="FromCurrency" Width="170" Height="30" Margin="46 0 0 0" FontSize="18" VerticalContentAlignment="Center" HorizontalContentAlignment="Center" VerticalAlignment="Top"/>
+            <fa:ImageAwesome Icon="Exchange" Height="30" Width="30" Margin="20 0 0 0" Foreground="White" VerticalAlignment="Top"/>
+            <ComboBox x:Name="ToCurrency" Width="170" Height="30" Margin="22 0 0 0" FontSize="18" HorizontalContentAlignment="Center" VerticalContentAlignment="Center" VerticalAlignment="Top"/>
+        </StackPanel>
+        <!--Buttons-->
+        <StackPanel Grid.Row="3" Height="100" Width="1000" Orientation="Horizontal">
+            <!--Convert Button-->
+            <Button x:Name="Convert" Click="Convert_Click" Content="Convert" Width="150" Height="40" Margin="312 0 0 0" Style="{StaticResource ButtonRound}" Foreground="White" FontSize="20">
+                <Button.Background>
+                    <LinearGradientBrush StartPoint="0,0" EndPoint="1,0">
+                        <GradientStop Color="#eeaeca" Offset="0.0"/>
+                        <GradientStop Color="#94bbe9" Offset="0.85"/>
+                    </LinearGradientBrush>
+                </Button.Background>
+            </Button>
+            <!--Clear Button-->
+            <Button x:Name="Clear" Click="Clear_Click" Content="Clear" Width="150" Height="40" Margin="75 0 0 0" Style="{StaticResource ButtonRound}" Foreground="White" FontSize="20">
+                <Button.Background>
+                    <LinearGradientBrush StartPoint="0,0" EndPoint="1,0">
+                        <GradientStop Color="#eeaeca" Offset="0.0"/>
+                        <GradientStop Color="#94bbe9" Offset="0.85"/>
+                    </LinearGradientBrush>
+                </Button.Background>
+            </Button>
+        </StackPanel>
+        <StackPanel Grid.Row="4" Height="150" Width="1000" Orientation="Horizontal">
+            <Image Height="130" Width="150" Margin="420 -20 0 0" Source="Images/logo.jpg"/>
+            <StackPanel Orientation="Vertical">
+                <Label Content="1$ USD Equals" Width="230" Margin="150 0 0 0" FontSize="15" HorizontalContentAlignment="Center"/>
+                <ComboBox x:Name="CurrencyToday" SelectionChanged="CurrencyToday_Value" Margin="150 0 0 0" Width="230" Height="30" FontSize="18" HorizontalContentAlignment="Center"/>
+                <Label x:Name="CurrencyToday_ValueLabel" Width="230" FontSize="15" Margin="150 0 0 0" HorizontalContentAlignment="Center"/>
+                <Label x:Name="CurrencyToday_InfoLabel" Width="230" FontSize="15" Margin="150 0 0 0" HorizontalContentAlignment="Center"/>
+            </StackPanel>
+        </StackPanel>
+    </Grid>
+
+</Window>
