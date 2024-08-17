@@ -1,4 +1,4 @@
-Thanks to your course I have been able to create this converter following the steps and changing a couple of things https://www.linkedin.com/in/denis-panjuta/?locale=de_DE
+Teacher Denis Panjuta thanks to your course I`ve been able to create this converter following the steps and changing a couple of things https://www.linkedin.com/in/denis-panjuta/?locale=de_DE
 
 More info about it works in my Obsidian Notes Folder, you can find it here https://github.com/jtokz/Notes/blob/main/DOT_NET/Projects%20and%20Exercises/Currency%20Converter%20using%20an%20API.md
 
