@@ -1,4 +1,4 @@
-﻿using System;
+using System;
 using System.Data;
 using System.Net.Http;
 using System.Threading.Tasks;
@@ -24,6 +24,7 @@ namespace WPF_CurrencyConverter_API
         }
         public class Rate // MAKE SURE API return VALUE NAME AND WHERE YOU WANT TO STORE NAME ARE THE SAME
         {
+        // Here you are gonna put all the currencies you want to fetch from the API
             public double USD { get; set; }
             public double MXN { get; set; }
             public double AUD { get; set; }
@@ -89,10 +90,11 @@ namespace WPF_CurrencyConverter_API
         private void BindCurrency()
         {
             DataTable dtCurrency = new DataTable();
-
+            // set the columns
             dtCurrency.Columns.Add("Text");
             dtCurrency.Columns.Add("Value");
-
+            // Here we are going to set and bind the currencies that you previously fetch from the api full name, short name 
+            // and which rate it is going to bind from Rate class
             dtCurrency.Rows.Add("--SELECT--", 0);
             dtCurrency.Rows.Add("United States Dollar - USD", values.rates.USD);
             dtCurrency.Rows.Add("European Union - EUR", values.rates.EUR);
@@ -125,22 +127,25 @@ namespace WPF_CurrencyConverter_API
             CurrencyToday.SelectedValuePath = "Value";
             CurrencyToday.SelectedIndex = 0;
         }
+        // Cover exeptions
         private void Convert_Click(object sender, RoutedEventArgs e)
         {
             double convertedValue;
-            // cover exceptions
+            // Not amount entered
             if (AmountBox == null || AmountBox.Text.Trim() == "")
             {
                 MessageBox.Show("Please Enter Currency", "Warning", MessageBoxButton.OK, MessageBoxImage.Warning);
                 AmountBox.Focus();
                 return;
             }
+            // Not From Currency item selected
             else if (FromCurrency.SelectedValue == null || FromCurrency.SelectedIndex == 0)
             {
                 MessageBox.Show("Please select a currency from", "Warning", MessageBoxButton.OK, MessageBoxImage.Warning);
                 FromCurrency.Focus();
                 return;
             }
+            // Not To Currency item selected
             else if (ToCurrency == null || ToCurrency.SelectedIndex == 0)
             {
                 MessageBox.Show("Please select a currency to", "Warning", MessageBoxButton.OK, MessageBoxImage.Warning);
@@ -156,7 +161,7 @@ namespace WPF_CurrencyConverter_API
                     LabelConvertedValue.Content = ToCurrency.Text + " " + convertedValue;
                 }
             }
-            else // -------------- Here is de Actual calculation ------------------
+            else // -------------- Here is the Actual calculation ------------------
             {
                 if (FromCurrency.SelectedIndex != 0 && ToCurrency.SelectedIndex != 0)
                 {
@@ -172,39 +177,33 @@ namespace WPF_CurrencyConverter_API
         private void EnteredAmount(object sender, TextCompositionEventArgs e)
         {
             if (!IsNumber(e.Text))
-            {
                 e.Handled = true;
-            }
         }
         private bool IsNumber(string e)
         {
             if (int.TryParse(e, out int i))
-            {
                 return true;
-            }
-            else return false;
+            else 
+                return false;
         }
         private void ResetControls()
         {
             AmountBox.Text = string.Empty;
             if (FromCurrency.Items.Count > 0)
-            {
                 FromCurrency.SelectedIndex = 0;
-            }
             if (ToCurrency.Items.Count > 0)
-            {
                 ToCurrency.SelectedIndex = 0;
-            }
             if (CurrencyToday.Items.Count > 0)
-            {
                 CurrencyToday.SelectedIndex = 0;
-            }
+
             LabelConvertedValue.Content = string.Empty;
             CurrencyToday_InfoLabel.Content = string.Empty;
             CurrencyToday_ValueLabel.Content = string.Empty;
             AmountBox.Focus();
         }
-
+        // Here we need to call Dispatcher in order to refresh correctly the ui
+        // Other way the currencies could be shown wrong and show the previous currency you selected
+        // ex. you previously selected Chinese Yuan and now select Pounds, Pounds could be shown CNY and not GBP
         private void CurrencyToday_Value(object sender, SelectionChangedEventArgs e)
         {
             Dispatcher.BeginInvoke(new Action(() =>
